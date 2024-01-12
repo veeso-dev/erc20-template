@@ -7,9 +7,10 @@ import Input from '../../reusable/Input';
 import Button from '../../reusable/Button';
 import Web3Client from '../../../web3/Web3Client';
 import Alerts from '../../reusable/Alerts';
+import { ChainId } from '../../MetamaskConnect';
 
 const TransferForm = () => {
-  const { account, ethereum } = useConnectedMetaMask();
+  const { account, ethereum, chainId } = useConnectedMetaMask();
   const [recipientAddress, setRecipientAddress] = React.useState('');
   const [amount, setAmount] = React.useState('');
   const [pendingTx, setPendingTx] = React.useState<boolean>(false);
@@ -27,7 +28,7 @@ const TransferForm = () => {
 
   const onMint = () => {
     setPendingTx(true);
-    const client = new Web3Client(account, ethereum);
+    const client = new Web3Client(account, ethereum, chainId as ChainId);
 
     const amoutNum = Number(amount);
 
@@ -61,9 +62,9 @@ const TransferForm = () => {
         onChange={onAmountChange}
         value={amount}
       />
-      <Button.Danger disabled={btnDisabled} onClick={onMint} className="!mt-4">
+      <Button.Primary disabled={btnDisabled} onClick={onMint} className="!mt-4">
         Transfer
-      </Button.Danger>
+      </Button.Primary>
       {error && (
         <Alerts.Danger>
           <p>{error}</p>

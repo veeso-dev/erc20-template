@@ -6,15 +6,16 @@ import Heading from '../../reusable/Heading';
 import Button from '../../reusable/Button';
 import Web3Client from '../../../web3/Web3Client';
 import Alerts from '../../reusable/Alerts';
+import { ChainId } from '../../MetamaskConnect';
 
 const RenounceOwnershipForm = () => {
-  const { account, ethereum } = useConnectedMetaMask();
+  const { account, ethereum, chainId } = useConnectedMetaMask();
   const [pendingTx, setPendingTx] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>();
 
   const onTransfer = () => {
     setPendingTx(true);
-    const client = new Web3Client(account, ethereum);
+    const client = new Web3Client(account, ethereum, chainId as ChainId);
     client
       .renounceOwnership()
       .then(() => {
