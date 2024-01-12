@@ -6,7 +6,13 @@ const { OWNER_ADDRESS } = process.env;
 async function main() {
   // deploy contract
   const Contract = await ethers.getContractFactory("MyToken");
-  const contract = await Contract.deploy(OWNER_ADDRESS!);
+  const contract = await Contract.deploy(
+    "MyToken",
+    "MTK",
+    OWNER_ADDRESS!,
+    1000000,
+    2
+  );
   await contract.waitForDeployment();
   const address = await contract.getAddress();
   console.log(`Contract deployed to ${address}`);
