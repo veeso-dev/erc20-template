@@ -5,7 +5,7 @@ const { OWNER_ADDRESS } = process.env;
 
 async function main() {
   // deploy contract
-  const Contract = await ethers.getContractFactory("MyNft");
+  const Contract = await ethers.getContractFactory("MyToken");
   const contract = await Contract.deploy(OWNER_ADDRESS!);
   await contract.waitForDeployment();
   const address = await contract.getAddress();

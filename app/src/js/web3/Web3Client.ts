@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 
-import { ABI, CONTRACT_ADDRESS } from './contracts/MyNft';
+import { ABI, CONTRACT_ADDRESS } from './contracts/MyToken';
 
 export default class Web3Client {
   private address: string;
@@ -18,9 +18,21 @@ export default class Web3Client {
       .send({ from: this.address });
   }
 
-  async safeMint(address: string, uri: string) {
+  async renounceOwnership() {
     const contract = this.getContract();
-    return contract.methods.safeMint(address, uri).send({ from: this.address });
+    return contract.methods.renounceOwnership().send({ from: this.address });
+  }
+
+  async transfer(recipient: string, amount: number) {
+    const contract = this.getContract();
+    return contract.methods
+      .transfer(recipient, amount)
+      .send({ from: this.address });
+  }
+
+  async balanceOf(address: string): Promise<number> {
+    const contract = this.getContract();
+    return contract.methods.balanceOf(address).call();
   }
 
   private getContract() {

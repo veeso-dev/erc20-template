@@ -8,10 +8,10 @@ import Button from '../../reusable/Button';
 import Web3Client from '../../../web3/Web3Client';
 import Alerts from '../../reusable/Alerts';
 
-const MintForm = () => {
+const TransferForm = () => {
   const { account, ethereum } = useConnectedMetaMask();
   const [recipientAddress, setRecipientAddress] = React.useState('');
-  const [tokenURI, setTokenURI] = React.useState('');
+  const [amount, setAmount] = React.useState('');
   const [pendingTx, setPendingTx] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>();
 
@@ -21,15 +21,18 @@ const MintForm = () => {
     setRecipientAddress(event.target.value);
   };
 
-  const onTokenURIChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTokenURI(event.target.value);
+  const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAmount(event.target.value);
   };
 
   const onMint = () => {
     setPendingTx(true);
     const client = new Web3Client(account, ethereum);
+
+    const amoutNum = Number(amount);
+
     client
-      .safeMint(recipientAddress, tokenURI)
+      .transfer(recipientAddress, amoutNum)
       .then(() => {
         setPendingTx(false);
         setError(undefined);
@@ -41,11 +44,11 @@ const MintForm = () => {
   };
 
   const btnDisabled =
-    tokenURI.length == 0 || recipientAddress.length !== 42 || pendingTx;
+    !isAmountNumber(amount) || recipientAddress.length !== 42 || pendingTx;
 
   return (
     <Container.FlexCols className="items-center">
-      <Heading.H2>Mint NFT</Heading.H2>
+      <Heading.H2>Transfer tokens</Heading.H2>
       <Input.Input
         id="mint-form-recipient-address"
         label="Recipient address"
@@ -53,14 +56,14 @@ const MintForm = () => {
         value={recipientAddress}
       />
       <Input.Input
-        id="mint-form-token-uri"
-        label="Token URI"
-        onChange={onTokenURIChange}
-        value={tokenURI}
+        id="mint-form-token-amount"
+        label="Token amount"
+        onChange={onAmountChange}
+        value={amount}
       />
-      <Button.Primary disabled={btnDisabled} onClick={onMint} className="!mt-4">
-        Mint
-      </Button.Primary>
+      <Button.Danger disabled={btnDisabled} onClick={onMint} className="!mt-4">
+        Transfer
+      </Button.Danger>
       {error && (
         <Alerts.Danger>
           <p>{error}</p>
@@ -70,4 +73,9 @@ const MintForm = () => {
   );
 };
 
-export default MintForm;
+const isAmountNumber = (amount: string) => {
+  const amountNum = Number(amount);
+  return !isNaN(amountNum);
+};
+
+export default TransferForm;

@@ -1,7 +1,7 @@
-# ERC721
+# ERC20
 
 [![license-mit](https://img.shields.io/badge/License-MIT-teal.svg)](https://opensource.org/license/mit/)
-[![build-test](https://github.com/veeso-dev/erc721-template/actions/workflows/build-test.yml/badge.svg)](https://github.com/veeso-dev/erc721-template/actions/workflows/build-test.yml)
+[![build-test](https://github.com/veeso-dev/erc20-template/actions/workflows/build-test.yml/badge.svg)](https://github.com/veeso-dev/erc20-template/actions/workflows/build-test.yml)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
 ## Get started
@@ -34,7 +34,7 @@ yarn deploy:goerli
 yarn deploy:ethereum
 ```
 
-### Mint and administrate NFT
+### Transfer and administrate the token
 
 Enter directory `./app`
 
@@ -53,14 +53,8 @@ Now browse to <http://localhost:1234/>.
 
 ## How to setup code from template
 
-## IPFS upload
-
-This repo comes with a built-in IPFS upload tool.
-
-Read more in this [README](./tools/ipfs-upload/README.md)
-
 ## License
 
-ERC721 template is licensed under the MIT license.
+ERC20 template is licensed under the MIT license.
 
 See the full license [HERE](./LICENSE)
