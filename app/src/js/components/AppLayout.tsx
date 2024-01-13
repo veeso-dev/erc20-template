@@ -8,7 +8,7 @@ import Form from './Form/Form';
 const AppLayout = () => (
   <Page.BlankPage>
     <Container.FlexRow className="justify-between items-center py-4 bg-brand px-4">
-      <span className="text-xl text-white">NFT WebUI</span>
+      <span className="text-xl text-white">ERC20 WebUI</span>
       <MetamaskConnect />
     </Container.FlexRow>
     <Container.PageContent className="py-8">

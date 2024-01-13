@@ -422,6 +422,7 @@ interface ContractAddress {
   [ChainId.Mainnet]: string;
   [ChainId.Rinkeby]: string;
   [ChainId.Ropsten]: string;
+  [ChainId.Hardhat]: string;
 }
 
 export const CONTRACT_ADDRESS: ContractAddress = {
@@ -430,4 +431,5 @@ export const CONTRACT_ADDRESS: ContractAddress = {
   [ChainId.Mainnet]: '0xa0647F0Da8B541C8876C234Bc9C4dC50F19515ea',
   [ChainId.Rinkeby]: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
   [ChainId.Ropsten]: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+  [ChainId.Hardhat]: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
 };
