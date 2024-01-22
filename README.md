@@ -53,6 +53,21 @@ Now browse to <http://localhost:1234/>.
 
 ## How to setup code from template
 
+## Verify source code
+
+put Etherscan apikey in `.env` file.
+
+Then run:
+
+```sh
+yarn hardhat verify --network $NETWORK "$CONTRACT_ADDRESS" "$NAME" "$SYMBOL" "$OWNER_ADDRESS" "$INITIAL_SUPPLY" $DECIMALS
+```
+
+Network can be either:
+
+- goerli
+- ethereum
+
 ## License
 
 ERC20 template is licensed under the MIT license.
