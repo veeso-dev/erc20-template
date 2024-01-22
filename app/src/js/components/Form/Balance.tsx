@@ -7,14 +7,39 @@ import { ChainId } from '../MetamaskConnect';
 
 const Balance = () => {
   const { account, ethereum, chainId } = useConnectedMetaMask();
-  const [balance, setBalance] = React.useState(0);
+  const [balance, setBalance] = React.useState<string>('0');
+  const [decimals, setDecimals] = React.useState(0);
 
   React.useEffect(() => {
     const client = new Web3Client(account, ethereum, chainId as ChainId);
-    client.balanceOf(account).then((balance) => {
-      setBalance(balance);
-    });
-  });
+    client
+      .balanceOf(account)
+      .then((accountBalance) => {
+        console.log('balance', accountBalance);
+        // put comma in `decimals` position
+        const balanceStr = accountBalance.toString();
+        const balanceArr = balanceStr.split('');
+        balanceArr.splice(balanceArr.length - decimals, 0, ',');
+        console.log(balanceArr);
+        setBalance(balanceArr.join(''));
+      })
+      .catch((e) => {
+        console.log('failed to get balance', e);
+      });
+  }, [decimals]);
+
+  React.useEffect(() => {
+    const client = new Web3Client(account, ethereum, chainId as ChainId);
+    client
+      .decimals()
+      .then((decs) => {
+        console.log('decimals', decs);
+        setDecimals(Number(decs));
+      })
+      .catch((e) => {
+        console.log('failed to get balance', e);
+      });
+  }, []);
 
   return (
     <Container.Container>
